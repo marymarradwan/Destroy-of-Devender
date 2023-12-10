@@ -1,0 +1,734 @@
+<Project>
+  <Name>DoD</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>DoD</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Grid</Name>
+        <Access>Public</Access>
+        <Location left="1310" top="408" />
+        <Size width="302" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public static int NUM_CELLS</Member>
+        <Member type="Field">public static int CELL_ZISE</Member>
+        <Member type="Field">private Unit[] allUnits</Member>
+        <Member type="Method">public void addUnit(Unit unit)</Member>
+        <Member type="Method">private Unit[] GetAllUnitsInRange(unit Unit)</Member>
+        <Member type="Method">public boolean AcceptUnitMovement(Unit unit, int x, int y)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Unit</Name>
+        <Access>Public</Access>
+        <Location left="1294" top="698" />
+        <Size width="398" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Unit _next</Member>
+        <Member type="Field">private Unit _prev</Member>
+        <Member type="Field">private UnitAttack activeUnitAttack</Member>
+        <Member type="Field">private UnitType[] canAttack</Member>
+        <Member type="Field">private Movement movement</Member>
+        <Member type="Field">private UnitPosition position</Member>
+        <Member type="Field">private Unit targetedUnit</Member>
+        <Member type="Field">private UnitDestroyObserver[] unitDestroyedObservers</Member>
+        <Member type="Field">private UnitProperty[] unitProperties</Member>
+        <Member type="Field">private UnitType unitType</Member>
+        <Member type="Field">private UnitDestroyObserver destructionObservers</Member>
+        <Member type="Constructor">public Unit(Grid grid, int x, int y, AttackStrategy attackStrategy, Player owner, Movement movement)</Member>
+        <Member type="Method">public void AcceptDamage(double damage)</Member>
+        <Member type="Method">public void AttackUnit(Unit targetUnit, UnitAttack unitAttack)</Member>
+        <Member type="Method">public final void onDestroy()</Member>
+        <Member type="Method">public void addUnitDestroyObserver(UnitDestroyObserver unitDestroyObserver)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>UnitType</Name>
+        <Access>Public</Access>
+        <Location left="890" top="619" />
+        <Size width="162" height="99" />
+        <Collapsed>False</Collapsed>
+        <Value>TeslaTank</Value>
+        <Value>Sniper</Value>
+      </Entity>
+      <Entity type="Interface">
+        <Name>AttackStrategy</Name>
+        <Access>Public</Access>
+        <Location left="700" top="825" />
+        <Size width="269" height="113" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Unit PrioritizeUnitToAttack(Unit[] units)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>HighestDamageAttackStrategy</Name>
+        <Access>Public</Access>
+        <Location left="575" top="1016" />
+        <Size width="235" height="103" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Unit PrioritizeUnitToAttack(Unit[] units)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LowestHealthAttackStrategy</Name>
+        <Access>Public</Access>
+        <Location left="839" top="1016" />
+        <Size width="235" height="103" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Unit PrioritizeUnitToAttack(Unit[] units)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Player</Name>
+        <Access>Public</Access>
+        <Location left="2346" top="724" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected int teamId</Member>
+        <Member type="Field">protected int coins</Member>
+        <Member type="Method">public abstract void NewGame()</Member>
+        <Member type="Method">public abstract void LoadGame()</Member>
+        <Member type="Method">public void buyUnit()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Team</Name>
+        <Access>Public</Access>
+        <Location left="2293" top="438" />
+        <Size width="255" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Player[] players</Member>
+        <Member type="Field">private UnitPosition[] teamUnitsInitializationPositions</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DoDGameManager</Name>
+        <Access>Public</Access>
+        <Location left="1894" top="408" />
+        <Size width="341" height="299" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Grid grid</Member>
+        <Member type="Field">private Unit mainBase</Member>
+        <Member type="Field">private int remainingAttackerUnits</Member>
+        <Member type="Field">private double remainingTime</Member>
+        <Member type="Field">private Team[] teams</Member>
+        <Member type="Field">private UnitFactory unitFactory</Member>
+        <Member type="Method">void OnUnitDestroy(Unit destroyedUnit)</Member>
+        <Member type="Method">public void BuyUnit(Player player, int x, int y, UnitType unitType)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UnitFactory</Name>
+        <Access>Public</Access>
+        <Location left="2003" top="788" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public Unit CreateUnit()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Movement</Name>
+        <Access>Public</Access>
+        <Location left="1750" top="788" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public abstract void move(Unit unit)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AttackerMovement</Name>
+        <Access>Public</Access>
+        <Location left="1663" top="1063" />
+        <Size width="162" height="117" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void move(Unit unit)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>All childs are Singelton</Text>
+        <Location left="1917" top="994" />
+        <Size width="83" height="60" />
+      </Entity>
+      <Entity type="Class">
+        <Name>ConsolePlayer</Name>
+        <Access>Public</Access>
+        <Location left="2154" top="1020" />
+        <Size width="162" height="117" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>GUIPlayer</Name>
+        <Access>Public</Access>
+        <Location left="2346" top="1020" />
+        <Size width="162" height="117" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OverNetworkPlayer</Name>
+        <Access>Public</Access>
+        <Location left="2536" top="1020" />
+        <Size width="162" height="117" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DefenderMovement</Name>
+        <Access>Public</Access>
+        <Location left="1836" top="1063" />
+        <Size width="162" height="117" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void move(Unit unit)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Singelton</Text>
+        <Location left="1803" top="599" />
+        <Size width="83" height="60" />
+      </Entity>
+      <Entity type="Class">
+        <Name>GameManager</Name>
+        <Access>Public</Access>
+        <Location left="2069" top="248" />
+        <Size width="162" height="100" />
+        <Collapsed>False</Collapsed>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UnitPosition</Name>
+        <Access>Public</Access>
+        <Location left="1076" top="588" />
+        <Size width="185" height="169" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private final int centerX</Member>
+        <Member type="Field">private int centerY</Member>
+        <Member type="Field">private int radius</Member>
+        <Member type="Method">public boolean squareIsOccupied()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AttackerTeam</Name>
+        <Access>Public</Access>
+        <Location left="2624" top="580" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DeffenderTeam</Name>
+        <Access>Public</Access>
+        <Location left="2624" top="281" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>GameState</Name>
+        <Access>Public</Access>
+        <Location left="1826" top="222" />
+        <Size width="162" height="140" />
+        <Collapsed>False</Collapsed>
+        <Value>Running</Value>
+        <Value>AttackerWon</Value>
+        <Value>DeffenderWon</Value>
+        <Value>Paused</Value>
+      </Entity>
+      <Entity type="Comment">
+        <Text>allUnits is Unit[][]
+
+but the software is not allowing this defention</Text>
+        <Location left="1620" top="542" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Interface">
+        <Name>UnitDestroyObserver</Name>
+        <Access>Public</Access>
+        <Location left="1338" top="222" />
+        <Size width="238" height="110" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void OnUnitDestroy(Unit destroyedUnit)</Member>
+      </Entity>
+      <Entity type="Comment">
+        <Text>All childs are Singelton</Text>
+        <Location left="987" top="930" />
+        <Size width="83" height="60" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>AttackUnit will call AcceptDamage for the targeted unit</Text>
+        <Location left="1149" top="881" />
+        <Size width="130" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>Movement.move() will call AcceptUnitMovement which will check if the required positon is available by calling squareIsOccupied for other units in the same cell</Text>
+        <Location left="1063" top="478" />
+        <Size width="219" height="96" />
+      </Entity>
+      <Entity type="Class">
+        <Name>UnitProperty</Name>
+        <Access>Public</Access>
+        <Location left="1715" top="1258" />
+        <Size width="162" height="121" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected double propertyValue</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AttackSpeedUnitProperty</Name>
+        <Access>Public</Access>
+        <Location left="1700" top="1459" />
+        <Size width="188" height="115" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HealthUnitProperty</Name>
+        <Access>Public</Access>
+        <Location left="1504" top="1459" />
+        <Size width="188" height="115" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ArmorUnitProperty</Name>
+        <Access>Public</Access>
+        <Location left="1896" top="1459" />
+        <Size width="162" height="115" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UnitAttack</Name>
+        <Access>Public</Access>
+        <Location left="682" top="1239" />
+        <Size width="241" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected UnitAttack unitAttack</Member>
+        <Member type="Field">private AttackResult attackResult</Member>
+        <Member type="Constructor">protected UnitAttack(UnitAttack unitAttack)</Member>
+        <Member type="Method">public abstract AttackResult PerformAttack(Unit unit)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NormalUnitAttack</Name>
+        <Access>Public</Access>
+        <Location left="591" top="1470" />
+        <Size width="225" height="104" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public AttackResult PerformAttack(Unit unit)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AttackResult</Name>
+        <Access>Public</Access>
+        <Location left="1170" top="1239" />
+        <Size width="234" height="159" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected AttackResult attackResult</Member>
+        <Member type="Constructor">protected AttackResult(AttackResult attackResult)</Member>
+        <Member type="Method">public abstract void ApplyAttackResultOnAttacker()</Member>
+        <Member type="Method">public abstract void ApplyAttackResultOnReceiver()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>EmptyAttackResult</Name>
+        <Access>Public</Access>
+        <Location left="1283" top="1470" />
+        <Size width="162" height="108" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AreaOfDestructionUnitAttack</Name>
+        <Access>Public</Access>
+        <Location left="839" top="1470" />
+        <Size width="227" height="104" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public AttackResult PerformAttack(Unit unit)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HealUnitAttackResult</Name>
+        <Access>Public</Access>
+        <Location left="1098" top="1470" />
+        <Size width="162" height="108" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Both UnitAttack and AttackResult are decorators</Text>
+        <Location left="967" top="1277" />
+        <Size width="160" height="75" />
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="1" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1408</X>
+          <Y>673</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1408</X>
+          <Y>652</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Realization" first="4" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>835</X>
+          <Y>991</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="5" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>954</X>
+          <Y>991</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>835</X>
+          <Y>991</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="3" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1073</X>
+          <Y>858</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1242</X>
+          <Y>858</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="0" second="8">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2073</X>
+          <Y>762</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2073</X>
+          <Y>740</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="11" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="10" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="15" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="14" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="13" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="16" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="18">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>2137</X>
+          <Y>383</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="6" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="7" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2264</X>
+          <Y>552</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>1..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Generalization" first="21" second="7">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="20" second="7">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="19" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1269</X>
+          <Y>785</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1832</X>
+          <Y>722</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1479</X>
+          <Y>649</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="8" second="24">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1767</X>
+          <Y>472</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1617</X>
+          <Y>298</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="9" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2052</X>
+          <Y>763</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1928</X>
+          <Y>739</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="9" second="10">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1944</X>
+          <Y>873</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="9" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2092</X>
+          <Y>1596</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>542</X>
+          <Y>962</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="29" second="28">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1796</X>
+          <Y>1427</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="30" second="28">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1606</X>
+          <Y>1434</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1796</X>
+          <Y>1425</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="31" second="28">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1976</X>
+          <Y>1434</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1796</X>
+          <Y>1425</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="28" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1792</X>
+          <Y>1233</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1577</X>
+          <Y>1201</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="33" second="32">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>678</X>
+          <Y>1445</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>802</X>
+          <Y>1426</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="35" second="34">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1369</X>
+          <Y>1445</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1283</X>
+          <Y>1423</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="36" second="32">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>929</X>
+          <Y>1445</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>802</X>
+          <Y>1426</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="37" second="34">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1194</X>
+          <Y>1445</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1283</X>
+          <Y>1423</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="32" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>816</X>
+          <Y>1199</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1390</X>
+          <Y>1160</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Dependency" first="9" second="28">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>2034</X>
+          <Y>1029</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>2022</X>
+          <Y>1322</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="34" second="28">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1437</X>
+          <Y>1308</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1690</X>
+          <Y>1308</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="1" second="24">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1198</X>
+          <Y>801</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>865</X>
+          <Y>285</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

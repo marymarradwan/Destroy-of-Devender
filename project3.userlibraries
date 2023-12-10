@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Project3" />
+  <library name="Project31">
+    <archive path="D:/project3/dist/Project3.jar" />
+  </library>
+  <library name="Project32" />
+  <library name="Project33" />
+  <library name="Project34" />
+  <library name="Project35" />
+  <library name="Project36" />
+</eclipse-userlibraries>
+
