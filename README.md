@@ -36,10 +36,11 @@ We welcome contributions and improvements to the project. You can report bugs or
 
 ## Author
 
-This project was developed by [Leen Alashkar]. You can reach me via email: [leenalashkar123@gmail.com].
+This project was developed by [Leen Alashkar]. You can reach me via email: leenalashkar123@gmail.com.
 
 ## Team
 
+- Marymar Radwan, email:marymarradwan@gmail.com
 - Ahmad Mriwed, email: mr.ahmadmriwed@gmail.com
 - Leen Alashkar, email: leenalashkar123@gmail.com
 
